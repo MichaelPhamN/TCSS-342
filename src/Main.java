@@ -107,8 +107,6 @@ public class Main {
 			System.out.println(burgerOrder);
 		}
 		
-		
-		
 		System.out.println(burgerType.toString());
 	}
 	
