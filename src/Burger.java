@@ -28,10 +28,8 @@ public class Burger {
 		}
 	}
 	
-	public void changePatties(final String pattyType) {
-		if(theWorks) {
-			
-		}
+	public void changePatties(final String pattyType) {		
+		
 	}
 	
 	public void addPatty() {

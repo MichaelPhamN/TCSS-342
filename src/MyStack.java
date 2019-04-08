@@ -1,12 +1,20 @@
 public class MyStack<Type> {
 	private Node top;
-	
-	public MyStack() {
-		top = null;
-	}
-	
+		
 	public boolean isEmpty() {
 		return top == null ? true : false;
+	}
+	
+	public Node getTop() {
+		return top;
+	}
+
+	public void setTop(Node top) {
+		this.top = top;
+	}
+
+	public MyStack() {
+		top = null;
 	}
 		
 	public void push(Type theItem) {

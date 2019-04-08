@@ -11,10 +11,10 @@ public class Main {
 		String pattyCount;
 		String pattyType;
 		String burgerOrder = "Burger";
-		String withCondition;
+		String withCondition = "";
 		String burgerOmissions;
 		String burgerAddtions;
-		String butCondition;
+		String butCondition = "";
 		String burgerExceptions;
 		Burger burgerType = null;
 
@@ -121,7 +121,27 @@ public class Main {
 		String backPart = line.substring(frontPart.length()).trim();
 		
 		if (backPart.length() > 0) {
-
+			if (burgerOrder.contentEquals("Baron Burger")) {
+				withCondition = "with no";
+				butCondition = "but";
+			} else {
+				withCondition = "with";
+				butCondition = "but no";
+			}
+			if (backPart.toLowerCase().contains(withCondition) && 
+					backPart.toLowerCase().contains(butCondition)) {
+				String[] data = backPart.split(butCondition);
+				burgerOmissions = data[0].substring(withCondition.length()).trim();
+				burgerExceptions = data[1].trim();
+				System.out.println(burgerOmissions);
+				System.out.println(burgerExceptions);
+			} else if (backPart.toLowerCase().contains(withCondition)) {
+				burgerOmissions = backPart.substring(withCondition.length()).trim();
+				System.out.println(burgerOmissions);
+			} else if (backPart.toLowerCase().contains(butCondition)) {
+				burgerExceptions = backPart.substring(butCondition.length()).trim();
+				System.out.println(burgerExceptions);
+			}
 		}
 		
 		
