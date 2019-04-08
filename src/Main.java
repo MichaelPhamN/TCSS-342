@@ -10,7 +10,12 @@ public class Main {
 	public static void parseLine(final String line) {
 		String pattyCount;
 		String pattyType;
-		String burgerOrder = " ";
+		String burgerOrder = "Burger";
+		String withCondition;
+		String burgerOmissions;
+		String burgerAddtions;
+		String butCondition;
+		String burgerExceptions;
 		Burger burgerType = null;
 
 		final Scanner currentLine = new Scanner(line);
@@ -52,10 +57,9 @@ public class Main {
 
 				if(burger.toLowerCase().contains("baron")) {
 					burgerType = new Burger(true);
-					burgerOrder = burgerOrder.concat("Baron Burger");
+					burgerOrder = "Baron Burger";
 				} else {
 					burgerType = new Burger(false);
-					burgerOrder = burgerOrder.concat("Burger");
 				}
 			}
 		} else {
@@ -79,10 +83,9 @@ public class Main {
 				//Checking the input is a baron burger or burger.
 				if(burger.toLowerCase().contains("baron")) {
 					burgerType = new Burger(true);
-					burgerOrder = burgerOrder.concat("Baron Burger");
+					burgerOrder = "Baron Burger";
 				} else {
 					burgerType = new Burger(false);
-					burgerOrder = burgerOrder.concat("Burger");
 				}
 			}
 		}
@@ -91,21 +94,36 @@ public class Main {
 			final String burger = currentLine.next();
 			if(burger.toLowerCase().contains("baron")) {
 				burgerType = new Burger(true);
-				burgerOrder = burgerOrder.concat("Baron Burger");
+				burgerOrder = "Baron Burger";
 			} else {
 				burgerType = new Burger(false);
-				burgerOrder = burgerOrder.concat("Burger");
 			}
 		}
+		
+		String frontPart = "";
+		if (!checkCount) {
+			if(checkType) {
+				frontPart = pattyType.concat(burgerOrder);
+			} else {
+				frontPart = burgerOrder;
+			}			
+		} else {
+			if(checkType) {
+				frontPart = pattyCount.concat(" " + pattyType).concat(" " + burgerOrder);
+			} else {
+				frontPart = pattyCount.concat(" " + burgerOrder);
+			}
+			
+		}
+		System.out.println(frontPart);
 		currentLine.close();
 		
-		if(checkCount && checkType) {
-			System.out.println(pattyCount.concat(burgerOrder));
-		} 
+		String backPart = line.substring(frontPart.length()).trim();
 		
-		if (!checkCount) {
-			System.out.println(burgerOrder);
+		if (backPart.length() > 0) {
+
 		}
+		
 		
 		System.out.println(burgerType.toString());
 	}
