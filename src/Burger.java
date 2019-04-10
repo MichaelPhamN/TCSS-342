@@ -1,7 +1,5 @@
 public class Burger {
 	private MyStack<String> order = new MyStack<String>();
-	private MyStack<String> temp = new MyStack<String>();
-	private MyStack<String> cheese = new MyStack<String>();
 	private boolean theWorks;
 	
 	public Burger(final boolean theWorks) {
@@ -31,8 +29,9 @@ public class Burger {
 		}
 	}
 	
-	public void changePatties(final String pattyType) {		
-		String pop;
+	public void changePatties(final String pattyType) {	
+		MyStack<String> temp = new MyStack<String>();
+		String pop;		
 		while (order.size() != 0) {
 			pop = order.pop();
 			if((pop.equalsIgnoreCase("beef") || pop.equalsIgnoreCase("chicken") ||
@@ -48,17 +47,32 @@ public class Burger {
 		}
 	}
 	
-	public void addPatty() {
-		String peek;
+	public void addPatty() {		
+		String pop;
+		String peek = "";
+		String food = "veggies";
+		MyStack<String> temp;
+		MyStack<String> cheeses = new MyStack<String>();
+		MyStack<String> veggies = new MyStack<String>();
+		MyStack<String> sauces = new MyStack<String>();
+		MyStack<String> patties = new MyStack<String>();
 		while (order.size() != 0) {
 			peek = order.peek();
-			if(!peek.equalsIgnoreCase("cheddar") || !peek.equalsIgnoreCase("mozzarella") ||
-					!peek.equalsIgnoreCase("pepperjack") || !peek.equalsIgnoreCase("beef")
-					|| !peek.equalsIgnoreCase("chicken") || !peek.equalsIgnoreCase("veggie")) {
-				temp.push(order.pop());
+			if(peek.equalsIgnoreCase("cheddar") || peek.equalsIgnoreCase("mozzarella") ||
+					peek.equalsIgnoreCase("pepperjack")) {
+				food = "cheese";				
+			} else if (peek.equalsIgnoreCase("lettuce") || peek.equalsIgnoreCase("tomato") ||
+					peek.equalsIgnoreCase("onions") || peek.equalsIgnoreCase("pickle") || 
+					peek.equalsIgnoreCase("mushrooms")) {
+				food = "veggies";
+			} else if (peek.equalsIgnoreCase("ketchup") || peek.equalsIgnoreCase("mustard") ||
+					peek.equalsIgnoreCase("mayonnaise") || peek.equalsIgnoreCase("baron-sauce")) {
+				food = "sauces";
 			} else {
-				
+				food = "patties";
 			}
+			
+			
 		}
 	}
 	
@@ -80,6 +94,6 @@ public class Burger {
 	
 	@Override
 	public String toString() {		
-		return temp.toString();
+		return order.toString();
 	}
 }

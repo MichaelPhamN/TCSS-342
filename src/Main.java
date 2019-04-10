@@ -12,10 +12,10 @@ public class Main {
 		String pattyType;
 		String burgerOrder = "Burger";
 		String withCondition = "";
-		String burgerOmissions;
-		String burgerAddtions;
+		String burgerOmissions = "";
+		String burgerAddtions = "";
 		String butCondition = "";
-		String burgerExceptions;
+		String burgerExceptions = "";
 		Burger burgerType = null;
 
 		final Scanner currentLine = new Scanner(line);
@@ -144,6 +144,35 @@ public class Main {
 			}
 		}
 		
+//		String pattyCount;
+//		String pattyType;
+//		String burgerOrder = "Burger";
+//		String withCondition = "";
+//		String burgerOmissions;
+//		String burgerAddtions;
+//		String butCondition = "";
+//		String burgerExceptions;
+		System.out.println(pattyCount);
+		System.out.println(pattyType);
+		System.out.println(burgerOrder);
+		System.out.println(withCondition);
+		System.out.println(burgerOmissions);
+		System.out.println(burgerAddtions);
+		System.out.println(butCondition);
+		System.out.println(burgerExceptions);
+		
+		if (pattyCount.equalsIgnoreCase("double")) {
+			burgerType.addPatty();
+		}
+		
+		if (pattyCount.equalsIgnoreCase("triple")) {
+			burgerType.addPatty();
+			burgerType.addPatty();
+		}
+		
+		if (!pattyType.equalsIgnoreCase("beef")) {
+			burgerType.changePatties(pattyType);
+		}
 		
 		System.out.println(burgerType.toString());
 	}
