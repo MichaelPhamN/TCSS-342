@@ -61,6 +61,7 @@ public class MyStack<Type> {
 		return i;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		if(isEmpty()) {
