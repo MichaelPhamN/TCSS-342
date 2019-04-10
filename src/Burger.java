@@ -30,8 +30,11 @@ public class Burger {
 	}
 	
 	public void changePatties(final String pattyType) {	
+		System.out.println("==============================");
 		MyStack<String> temp = new MyStack<String>();
 		String pop;		
+		System.out.println("==============================");
+		System.out.println(order.toString());
 		while (order.size() != 0) {
 			pop = order.pop();
 			if((pop.equalsIgnoreCase("beef") || pop.equalsIgnoreCase("chicken") ||
@@ -48,32 +51,133 @@ public class Burger {
 	}
 	
 	public void addPatty() {		
-		String pop;
 		String peek = "";
-		String food = "veggies";
-		MyStack<String> temp;
+		String food = "";
+		MyStack<String> temp = null;
+		MyStack<String> bun = new MyStack<String>();
 		MyStack<String> cheeses = new MyStack<String>();
 		MyStack<String> veggies = new MyStack<String>();
 		MyStack<String> sauces = new MyStack<String>();
 		MyStack<String> patties = new MyStack<String>();
+		System.out.println(order.toString());
+		System.exit(0);
+		int size = order.size();
 		while (order.size() != 0) {
 			peek = order.peek();
-			if(peek.equalsIgnoreCase("cheddar") || peek.equalsIgnoreCase("mozzarella") ||
-					peek.equalsIgnoreCase("pepperjack")) {
-				food = "cheese";				
-			} else if (peek.equalsIgnoreCase("lettuce") || peek.equalsIgnoreCase("tomato") ||
-					peek.equalsIgnoreCase("onions") || peek.equalsIgnoreCase("pickle") || 
-					peek.equalsIgnoreCase("mushrooms")) {
-				food = "veggies";
-			} else if (peek.equalsIgnoreCase("ketchup") || peek.equalsIgnoreCase("mustard") ||
-					peek.equalsIgnoreCase("mayonnaise") || peek.equalsIgnoreCase("baron-sauce")) {
-				food = "sauces";
+			String categories = peek;
+			if (size != order.size()) {
+				
+				if(peek.equalsIgnoreCase("cheddar") || peek.equalsIgnoreCase("mozzarella") ||
+						peek.equalsIgnoreCase("pepperjack")) {
+					categories = "cheese";			
+				} else if (peek.equalsIgnoreCase("lettuce") || peek.equalsIgnoreCase("tomato") ||
+						peek.equalsIgnoreCase("onions") || peek.equalsIgnoreCase("pickle") || 
+						peek.equalsIgnoreCase("mushrooms")) {
+					categories = "veggies";
+				} else if (peek.equalsIgnoreCase("ketchup") || peek.equalsIgnoreCase("mustard") ||
+						peek.equalsIgnoreCase("mayonnaise") || peek.equalsIgnoreCase("baron-sauce")) {
+					categories = "sauces";
+				} else if (peek.equalsIgnoreCase("beef") || peek.equalsIgnoreCase("chicken") || peek.equalsIgnoreCase("veggie")) {
+					categories = "patties";
+				} else {
+					categories = "bun";
+				}
+				
+				
+				if (!categories.equalsIgnoreCase(food)) {
+					temp.push(" ");
+					if(categories.equalsIgnoreCase("cheese")) {
+						food = "cheese";			
+						cheeses.push(order.pop());
+						temp = cheeses;
+					} else if (categories.equalsIgnoreCase("veggies")) {
+						food = "veggies";
+						veggies.push(order.pop());
+						temp = veggies;
+					} else if (categories.equalsIgnoreCase("sauces")) {
+						food = "sauces";
+						sauces.push(order.pop());
+						temp = sauces;
+					} else if (categories.equalsIgnoreCase("patties")) {
+						food = "patties";
+						patties.push(order.pop());
+						temp = patties;
+					} else {
+						food = "bun";
+						bun.push(order.pop());
+						temp = bun;
+					}	
+				} else {
+					if(categories.equalsIgnoreCase("cheese")) {
+						cheeses.push(order.pop());
+					} else if (categories.equalsIgnoreCase("veggies")) {
+						veggies.push(order.pop());
+					} else if (categories.equalsIgnoreCase("sauces")) {
+						sauces.push(order.pop());
+					} else if (categories.equalsIgnoreCase("patties")) {
+						patties.push(order.pop());
+					} else {
+						bun.push(order.pop());
+					}
+				}
 			} else {
-				food = "patties";
-			}
-			
-			
+				if(peek.equalsIgnoreCase("cheddar") || peek.equalsIgnoreCase("mozzarella") ||
+						peek.equalsIgnoreCase("pepperjack")) {
+					food = "cheese";			
+					cheeses.push(order.pop());
+					temp = cheeses;
+				} else if (peek.equalsIgnoreCase("lettuce") || peek.equalsIgnoreCase("tomato") ||
+						peek.equalsIgnoreCase("onions") || peek.equalsIgnoreCase("pickle") || 
+						peek.equalsIgnoreCase("mushrooms")) {
+					food = "veggies";
+					veggies.push(order.pop());
+					temp = veggies;
+				} else if (peek.equalsIgnoreCase("ketchup") || peek.equalsIgnoreCase("mustard") ||
+						peek.equalsIgnoreCase("mayonnaise") || peek.equalsIgnoreCase("baron-sauce")) {
+					food = "sauces";
+					sauces.push(order.pop());
+					temp = sauces;
+				} else if (peek.equalsIgnoreCase("beef") || peek.equalsIgnoreCase("chicken") || peek.equalsIgnoreCase("veggie")) {
+					food = "patties";
+					patties.push(order.pop());
+					temp = patties;
+				} else {
+					food = "bun";
+					bun.push(order.pop());
+					temp = bun;
+				}				
+			}	
 		}
+		
+		if (bun.peek().equalsIgnoreCase(" ")) {
+			bun.pop();
+		}
+		
+		if (cheeses.peek().equalsIgnoreCase(" ")) {
+			cheeses.pop();
+		}
+		
+		if (veggies.peek().equalsIgnoreCase(" ")) {
+			veggies.pop();
+		}
+		
+		if (sauces.peek().equalsIgnoreCase(" ")) {
+			sauces.pop();
+		}
+		
+		if (patties.peek().equalsIgnoreCase(" ")) {
+			patties.pop();
+		}
+		
+		patties.push(patties.peek());
+		
+		
+		
+		System.out.println(bun);
+		System.out.println(cheeses);
+		System.out.println(veggies);
+		System.out.println(sauces);
+		System.out.println(patties);
 	}
 	
 	public void addCategory(final String type) {

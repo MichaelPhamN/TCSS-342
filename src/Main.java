@@ -59,6 +59,7 @@ public class Main {
 					burgerType = new Burger(true);
 					burgerOrder = "Baron Burger";
 				} else {
+					System.out.println("Jump Heree");
 					burgerType = new Burger(false);
 				}
 			}
@@ -85,6 +86,7 @@ public class Main {
 					burgerType = new Burger(true);
 					burgerOrder = "Baron Burger";
 				} else {
+					System.out.println("Jump Heree");
 					burgerType = new Burger(false);
 				}
 			}
@@ -96,6 +98,7 @@ public class Main {
 				burgerType = new Burger(true);
 				burgerOrder = "Baron Burger";
 			} else {
+				System.out.println("Jump Heree");
 				burgerType = new Burger(false);
 			}
 		}
@@ -103,7 +106,7 @@ public class Main {
 		String frontPart = "";
 		if (!checkCount) {
 			if(checkType) {
-				frontPart = pattyType.concat(burgerOrder);
+				frontPart = pattyType.concat(" " + burgerOrder);
 			} else {
 				frontPart = burgerOrder;
 			}			
@@ -115,11 +118,10 @@ public class Main {
 			}
 			
 		}
-		System.out.println(frontPart);
+
 		currentLine.close();
-		
+		System.out.println(frontPart);
 		String backPart = line.substring(frontPart.length()).trim();
-		
 		if (backPart.length() > 0) {
 			if (burgerOrder.contentEquals("Baron Burger")) {
 				withCondition = "with no";
@@ -128,6 +130,7 @@ public class Main {
 				withCondition = "with";
 				butCondition = "but no";
 			}
+			
 			if (backPart.toLowerCase().contains(withCondition) && 
 					backPart.toLowerCase().contains(butCondition)) {
 				String[] data = backPart.split(butCondition);
@@ -160,7 +163,6 @@ public class Main {
 		System.out.println(burgerAddtions);
 		System.out.println(butCondition);
 		System.out.println(burgerExceptions);
-		
 		if (pattyCount.equalsIgnoreCase("double")) {
 			burgerType.addPatty();
 		}
@@ -173,8 +175,8 @@ public class Main {
 		if (!pattyType.equalsIgnoreCase("beef")) {
 			burgerType.changePatties(pattyType);
 		}
-		
-		System.out.println(burgerType.toString());
+
+//		System.out.println(burgerType.toString());
 	}
 	
 	public void testMyStack() {
