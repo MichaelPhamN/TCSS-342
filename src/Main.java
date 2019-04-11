@@ -139,14 +139,14 @@ public class Main {
 			if (backPart.toLowerCase().contains(withCondition) && 
 					backPart.toLowerCase().contains(butCondition)) {
 				String[] data = backPart.split(butCondition);
-				if (burgerOrder.contentEquals("Baron Burger")) {
+				if (burgerOrder.toLowerCase().contains("baron burger")) {
 					burgerOmissions = data[0].substring(withCondition.length()).trim();					
 				} else {
 					burgerAddtions = data[0].substring(withCondition.length()).trim();
 				}
 				burgerExceptions = data[1].trim();
 			} else if (backPart.toLowerCase().contains(withCondition)) {
-				if (burgerOrder.contentEquals("Baron Burger")) {
+				if (burgerOrder.toLowerCase().contains("baron burger")) {
 					burgerOmissions = backPart.substring(withCondition.length()).trim();					
 				} else {
 					burgerAddtions = backPart.substring(withCondition.length()).trim();
@@ -164,11 +164,128 @@ public class Main {
 //		System.out.println(butCondition);
 //		System.out.println(burgerExceptions);
 		
+		//Exception
+		String[] arrExceptions;
+		if (burgerExceptions.trim().length() > 0) {
+			arrExceptions = burgerExceptions.split(" ");
+			if (burgerOrder.toLowerCase().contains("baron burger")) {
+				if (arrExceptions.length > 1) {
+					for (int i = 0; i < arrExceptions.length; i++) {
+						if (arrExceptions[i].toLowerCase().equals("cheese")) {
+							burgerType.addCategory("Cheese");
+						} else if (arrExceptions[i].toLowerCase().equals("sauce")) {
+							burgerType.addCategory("Sauce");
+						} else if (arrExceptions[i].toLowerCase().equals("veggies")) {
+							burgerType.addCategory("Veggies");
+						} else {
+							burgerType.addIngredient(arrExceptions[i]);
+						}
+					}
+				} else {
+					if (arrExceptions[0].toLowerCase().equals("cheese")) {
+						burgerType.addCategory("Cheese");
+					} else if (arrExceptions[0].toLowerCase().equals("sauce")) {
+						burgerType.addCategory("Sauce");
+					} else if (arrExceptions[0].toLowerCase().equals("veggies")) {
+						burgerType.addCategory("Veggies");
+					} else {
+						burgerType.addIngredient(arrExceptions[0]);
+					}
+				}
+				
+			} else {
+				//no exceptions
+				if (arrExceptions.length > 1) {
+					for (int i = 0; i < arrExceptions.length; i++) {
+						if (arrExceptions[i].toLowerCase().equals("cheese")) {
+							burgerType.removeCategory("Cheese");
+						} else if (arrExceptions[i].toLowerCase().equals("sauce")) {
+							burgerType.removeCategory("Sauce");
+						} else if (arrExceptions[i].toLowerCase().equals("veggies")) {
+							burgerType.removeCategory("Veggies");
+						} else {
+							burgerType.removeIngredient(arrExceptions[i]);
+						}
+					}
+				} else {
+					if (arrExceptions[0].toLowerCase().equals("cheese")) {
+						burgerType.removeCategory("Cheese");
+					} else if (arrExceptions[0].toLowerCase().equals("sauce")) {
+						burgerType.removeCategory("Sauce");
+					} else if (arrExceptions[0].toLowerCase().equals("veggies")) {
+						burgerType.removeCategory("Veggies");
+					} else {
+						burgerType.removeIngredient(arrExceptions[0]);
+					}
+				}
+			}
+		}		
+		
+		//Additions or Omissions
+		if (burgerOrder.toLowerCase().contains("baron burger")) {
+			String[] arrOmissions;
+			if (burgerOmissions.length() > 0) {
+				arrOmissions = burgerOmissions.split(" ");
+				if (arrOmissions.length > 1) {
+					for (int i = 0; i < arrOmissions.length; i++) {
+						if (arrOmissions[i].toLowerCase().equals("cheese")) {
+							burgerType.removeCategory("Cheese");
+						} else if (arrOmissions[i].toLowerCase().equals("sauce")) {
+							burgerType.removeCategory("Sauce");
+						} else if (arrOmissions[i].toLowerCase().equals("veggies")) {
+							burgerType.removeCategory("Veggies");
+						} else {
+							burgerType.removeIngredient(arrOmissions[i]);
+						}
+					}
+				} else {
+					if (arrOmissions[0].toLowerCase().equals("cheese")) {
+						burgerType.removeCategory("Cheese");
+					} else if (arrOmissions[0].toLowerCase().equals("sauce")) {
+						burgerType.removeCategory("Sauce");
+					} else if (arrOmissions[0].toLowerCase().equals("veggies")) {
+						burgerType.removeCategory("Veggies");
+					} else {
+						burgerType.removeIngredient(arrOmissions[0]);
+					}
+				}
+			} 
+		} else {
+			String[] arrAdditions;
+			if (burgerAddtions.length() > 0) {
+				arrAdditions = burgerAddtions.split(" ");
+				if (arrAdditions.length > 1) {
+					for (int i = 0; i < arrAdditions.length; i++) {
+						if (arrAdditions[i].toLowerCase().equals("cheese")) {
+							burgerType.addCategory("Cheese");
+						} else if (arrAdditions[i].toLowerCase().equals("sauce")) {
+							burgerType.addCategory("Sauce");
+						} else if (arrAdditions[i].toLowerCase().equals("veggies")) {
+							burgerType.addCategory("Veggies");
+						} else {
+							burgerType.addIngredient(arrAdditions[i]);
+						}
+					}
+				} else {
+					if (arrAdditions[0].toLowerCase().equals("cheese")) {
+						burgerType.addCategory("Cheese");
+					} else if (arrAdditions[0].toLowerCase().equals("sauce")) {
+						burgerType.addCategory("Sauce");
+					} else if (arrAdditions[0].toLowerCase().equals("veggies")) {
+						burgerType.addCategory("Veggies");
+					} else {
+						burgerType.addIngredient(arrAdditions[0]);
+					}
+				}
+			} 
+		}
+		
+		//Change Patty
 		if (!pattyType.equalsIgnoreCase("beef")) {
 			burgerType.changePatties(pattyType);
 		}
 		
-		
+		//Add Patty
 		if (pattyCount.equalsIgnoreCase("double")) {
 			burgerType.addPatty();
 		}
@@ -178,8 +295,8 @@ public class Main {
 			burgerType.addPatty();
 		}
 
-
-//		System.out.println(burgerType.toString());
+//		System.out.println(order.toString());
+		System.out.println(burgerType.toString());
 	}
 	
 	public void testMyStack() {

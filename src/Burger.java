@@ -166,10 +166,18 @@ public class Burger {
 		}
 		
 		patties.push(patties.peek());
-		
+
 				
 		if (theWorks) {
-			while (bun.size() != 0 && !bun.peek().equalsIgnoreCase(" ")) {
+			if (veggies.peek() != null && veggies.peek().equalsIgnoreCase("pickle")) {
+				order.push(veggies.pop());
+			}
+			
+			if (veggies.peek() != null && veggies.peek().equalsIgnoreCase(" ")) {
+				veggies.pop();
+			}
+			
+			if (bun.size() != 0) {
 				order.push(bun.pop());
 			}
 			
@@ -178,8 +186,8 @@ public class Burger {
 			}
 			
 			while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(" ")) {
-				if (sauces.peek().equalsIgnoreCase("ketchup") ||
-						sauces.peek().equalsIgnoreCase("mustard")) {
+				if (sauces.peek().equalsIgnoreCase("mayonnaise") ||
+						sauces.peek().equalsIgnoreCase("baron-sauce")) {
 					order.push(sauces.pop());
 				}
 			}
@@ -187,29 +195,8 @@ public class Burger {
 			if (sauces.peek() != null && sauces.peek().equalsIgnoreCase(" ")) {
 				sauces.pop();
 			}
-			
-			
-			while (veggies.size() != 0 && veggies.peek().equalsIgnoreCase(" ")) {
-				if (veggies.peek().equalsIgnoreCase("mushrooms")) {
-					order.push(veggies.pop());
-				}
-			}
-			
-			if (veggies.peek() != null && veggies.peek().equalsIgnoreCase(" ")) {
-				veggies.pop();
-			}			
-			
-			order.push(patties.pop());
-			
-			while (cheeses.size() != 0) {				
-				order.push(veggies.pop());				
-			}
-			
-			while (patties.size() != 0) {
-				order.push(patties.pop());
-			}
-			
-			while (veggies.size() != 0) {				
+					
+			while (veggies.size() != 0 && !veggies.peek().equalsIgnoreCase(" ")) {				
 				if (veggies.peek().equalsIgnoreCase("onions") 
 						|| veggies.peek().equalsIgnoreCase("tomato") 
 						|| veggies.peek().equalsIgnoreCase("lettuce") ) {
@@ -220,28 +207,50 @@ public class Burger {
 			if (veggies.peek() != null && veggies.peek().equalsIgnoreCase(" ")) {
 				veggies.pop();
 			}
-			
-			while (sauces.size() != 0) {				
-				order.push(sauces.pop());				
+						
+			if (veggies.peek() != null && veggies.peek().equalsIgnoreCase(" ")) {
+				veggies.pop();
+			}
+
+			while (patties.size() != 1) {
+				if (patties.peek().equalsIgnoreCase(" ")) {
+					patties.pop();
+				} else {
+					order.push(patties.pop());
+				}
 			}
 			
-			order.push(bun.pop());
+			while (cheeses.size() != 0) {				
+				order.push(cheeses.pop());				
+			}
 			
-			if (veggies.peek() != null) {
+			if (patties.size() == 1) {
+				order.push(patties.pop());
+			}
+			
+			while (veggies.size() != 0) {
 				order.push(veggies.pop());
 			}
-		} else {
-			while (bun.size() != 0 && !bun.peek().equalsIgnoreCase(" ")) {
+			
+			while (sauces.size() != 0) {
+				order.push(sauces.pop());
+			}
+			
+			if (bun.peek() != null) {
 				order.push(bun.pop());
 			}
+		} else {
+			if (bun.size() != 0) {
+				order.push(bun.pop());
+			}			
 			
 			if (bun.peek() != null && bun.peek().equalsIgnoreCase(" ")) {
 				bun.pop();
 			}
 			
 			while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(" ")) {
-				if (sauces.peek().equalsIgnoreCase("ketchup") ||
-						sauces.peek().equalsIgnoreCase("mustard")) {
+				if (sauces.peek().equalsIgnoreCase("mayonnaise") ||
+						sauces.peek().equalsIgnoreCase("baron-sauce")) {
 					order.push(sauces.pop());
 				}
 			}
@@ -249,41 +258,58 @@ public class Burger {
 			if (sauces.peek() != null && sauces.peek().equalsIgnoreCase(" ")) {
 				sauces.pop();
 			}
-			
-			
-			while (veggies.size() != 0 && veggies.peek().equalsIgnoreCase(" ")) {
-				if (veggies.peek().equalsIgnoreCase("mushrooms")) {
+					
+			while (veggies.size() != 0 && !veggies.peek().equalsIgnoreCase(" ")) {				
+				if (veggies.peek().equalsIgnoreCase("onions") 
+						|| veggies.peek().equalsIgnoreCase("tomato") 
+						|| veggies.peek().equalsIgnoreCase("lettuce") ) {
 					order.push(veggies.pop());
-				}
+				}				
 			}
 			
 			if (veggies.peek() != null && veggies.peek().equalsIgnoreCase(" ")) {
 				veggies.pop();
-			}			
-			
-			order.push(patties.pop());
-			
-			while (cheeses.size() != 0) {				
-				order.push(veggies.pop());				
+			}
+						
+			if (veggies.peek() != null && veggies.peek().equalsIgnoreCase(" ")) {
+				veggies.pop();
 			}
 			
-			while (patties.size() != 0) {
+			while (patties.size() != 1) {
+				if (patties.peek().equalsIgnoreCase(" ")) {
+					patties.pop();
+				} else {
+					order.push(patties.pop());
+				}
+			}
+			
+			while (cheeses.size() != 0) {				
+				order.push(cheeses.pop());				
+			}
+			
+			if (patties.size() == 1) {
 				order.push(patties.pop());
 			}
 			
-			while (veggies.size() != 0) {				
-				order.push(veggies.pop());				
+			while (veggies.size() != 0) {
+				order.push(veggies.pop());
 			}
 			
-			while (sauces.size() != 0) {				
-				order.push(sauces.pop());				
+			while (sauces.size() != 0) {
+				order.push(sauces.pop());
 			}
 			
-			order.push(bun.pop());
-			
+			if (bun.peek() != null) {
+				order.push(bun.pop());
+			}
 		}
 
-		System.out.println(order.toString());
+//		System.out.println(bun);
+//		System.out.println(sauces);
+//		System.out.println(veggies);
+//		System.out.println(cheeses);
+//		System.out.println(patties);
+
 	}
 	
 	public void addCategory(final String type) {
@@ -302,7 +328,6 @@ public class Burger {
 		
 	}
 	
-	@Override
 	public String toString() {		
 		return order.toString();
 	}
