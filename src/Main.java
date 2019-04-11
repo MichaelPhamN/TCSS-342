@@ -59,7 +59,14 @@ public class Main {
 					burgerType = new Burger(true);
 					burgerOrder = "Baron Burger";
 				} else {
-					System.out.println("Jump Heree");
+					burgerType = new Burger(false);
+				}
+			} else {
+				final String burger = currentLine.next();
+				if(burger.toLowerCase().contains("baron")) {
+					burgerType = new Burger(true);
+					burgerOrder = "Baron Burger";
+				} else {
 					burgerType = new Burger(false);
 				}
 			}
@@ -120,7 +127,7 @@ public class Main {
 		}
 
 		currentLine.close();
-		System.out.println(frontPart);
+
 		String backPart = line.substring(frontPart.length()).trim();
 		if (backPart.length() > 0) {
 			if (burgerOrder.contentEquals("Baron Burger")) {

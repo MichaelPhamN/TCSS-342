@@ -30,11 +30,9 @@ public class Burger {
 	}
 	
 	public void changePatties(final String pattyType) {	
-		System.out.println("==============================");
 		MyStack<String> temp = new MyStack<String>();
 		String pop;		
-		System.out.println("==============================");
-		System.out.println(order.toString());
+		
 		while (order.size() != 0) {
 			pop = order.pop();
 			if((pop.equalsIgnoreCase("beef") || pop.equalsIgnoreCase("chicken") ||
@@ -59,8 +57,7 @@ public class Burger {
 		MyStack<String> veggies = new MyStack<String>();
 		MyStack<String> sauces = new MyStack<String>();
 		MyStack<String> patties = new MyStack<String>();
-		System.out.println(order.toString());
-		System.exit(0);
+		
 		int size = order.size();
 		while (order.size() != 0) {
 			peek = order.peek();
