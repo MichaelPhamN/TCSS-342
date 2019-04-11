@@ -93,7 +93,6 @@ public class Main {
 					burgerType = new Burger(true);
 					burgerOrder = "Baron Burger";
 				} else {
-					System.out.println("Jump Heree");
 					burgerType = new Burger(false);
 				}
 			}
@@ -105,7 +104,6 @@ public class Main {
 				burgerType = new Burger(true);
 				burgerOrder = "Baron Burger";
 			} else {
-				System.out.println("Jump Heree");
 				burgerType = new Burger(false);
 			}
 		}
@@ -130,7 +128,7 @@ public class Main {
 
 		String backPart = line.substring(frontPart.length()).trim();
 		if (backPart.length() > 0) {
-			if (burgerOrder.contentEquals("Baron Burger")) {
+			if (burgerOrder.toLowerCase().contains("baron burger")) {
 				withCondition = "with no";
 				butCondition = "but";
 			} else {
@@ -141,35 +139,36 @@ public class Main {
 			if (backPart.toLowerCase().contains(withCondition) && 
 					backPart.toLowerCase().contains(butCondition)) {
 				String[] data = backPart.split(butCondition);
-				burgerOmissions = data[0].substring(withCondition.length()).trim();
+				if (burgerOrder.contentEquals("Baron Burger")) {
+					burgerOmissions = data[0].substring(withCondition.length()).trim();					
+				} else {
+					burgerAddtions = data[0].substring(withCondition.length()).trim();
+				}
 				burgerExceptions = data[1].trim();
-				System.out.println(burgerOmissions);
-				System.out.println(burgerExceptions);
 			} else if (backPart.toLowerCase().contains(withCondition)) {
-				burgerOmissions = backPart.substring(withCondition.length()).trim();
-				System.out.println(burgerOmissions);
+				if (burgerOrder.contentEquals("Baron Burger")) {
+					burgerOmissions = backPart.substring(withCondition.length()).trim();					
+				} else {
+					burgerAddtions = backPart.substring(withCondition.length()).trim();
+				}
 			} else if (backPart.toLowerCase().contains(butCondition)) {
 				burgerExceptions = backPart.substring(butCondition.length()).trim();
-				System.out.println(burgerExceptions);
 			}
 		}
+//		System.out.println(pattyCount);
+//		System.out.println(pattyType);
+//		System.out.println(burgerOrder);
+//		System.out.println(withCondition);
+//		System.out.println(burgerOmissions);
+//		System.out.println(burgerAddtions);
+//		System.out.println(butCondition);
+//		System.out.println(burgerExceptions);
 		
-//		String pattyCount;
-//		String pattyType;
-//		String burgerOrder = "Burger";
-//		String withCondition = "";
-//		String burgerOmissions;
-//		String burgerAddtions;
-//		String butCondition = "";
-//		String burgerExceptions;
-		System.out.println(pattyCount);
-		System.out.println(pattyType);
-		System.out.println(burgerOrder);
-		System.out.println(withCondition);
-		System.out.println(burgerOmissions);
-		System.out.println(burgerAddtions);
-		System.out.println(butCondition);
-		System.out.println(burgerExceptions);
+		if (!pattyType.equalsIgnoreCase("beef")) {
+			burgerType.changePatties(pattyType);
+		}
+		
+		
 		if (pattyCount.equalsIgnoreCase("double")) {
 			burgerType.addPatty();
 		}
@@ -178,10 +177,7 @@ public class Main {
 			burgerType.addPatty();
 			burgerType.addPatty();
 		}
-		
-		if (!pattyType.equalsIgnoreCase("beef")) {
-			burgerType.changePatties(pattyType);
-		}
+
 
 //		System.out.println(burgerType.toString());
 	}
