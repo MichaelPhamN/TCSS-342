@@ -290,39 +290,88 @@ public class Main {
 	}
 	
 	public static void testMyStack() {
+		System.out.println("\n");
+		System.out.println("\n");
+		System.out.println("\n");
+		System.out.println("======================Begin Test Stack======================");
 		MyStack <String> test = new MyStack<String>();
-		test.push("WITCH!");
-		test.push("A");
-		test.push("SHE'S");
+		if(test.isEmpty()) {
+			System.out.println("Stack is not empty.");
+		} else {
+			System.out.println("Stack is empty now.");
+		}
+		
+		test.push("Computer");
+		test.push("Engineering");
+		test.push("University");
+		test.push("Washington");
+		test.push("Of");
+		test.push("Tacoma");
+		test.push("Spring");
+		test.push("2019");
 		System.out.println(test.toString());
-		System.out.println("Size:  " + test.size());
-		System.out.println("Peek:  " + test.peek());
-		if(!test.isEmpty())
-			System.out.println("NOT EMPTY");
+		System.out.println("Stack Size:  " + test.size());
+		System.out.println("Pop and push to a new stack");
+		MyStack <String> temp = new MyStack<String>();
+		StringBuilder str = new StringBuilder();
+		while (test.size() != 0) {
+			str.append(test.peek());
+			str.append(" ");
+			temp.push(test.pop());
+		}
+		System.out.println(str.toString());
+		
+		if(test.isEmpty()) {
+			System.out.println("Stack is empty now.");
+		}
+		
 		System.out.println(test.pop());
 		System.out.println(test.pop());
-		System.out.println(test.pop());
-		if(test.isEmpty())
-			System.out.println("EMPTY");
+		
+		System.out.println("Change Engineering to Science");
+		while (temp.size() != 0) {
+			if (temp.peek().equalsIgnoreCase("Engineering")) {
+				temp.pop();
+				test.push("Science");
+			} else {
+				test.push(temp.pop());
+			}			
+		}
+		System.out.println(test.toString());
+		System.out.println("======================End Test Stack======================");
 	}
 	
 	public static void testBurger() throws IOException {
+		System.out.println("\n");
+		System.out.println("\n");
+		System.out.println("\n");
+		System.out.println("======================Begin Test Burger======================");
 		Burger testBurger = new Burger(true);
 		testBurger.toString();
-		testBurger.removeCategory("Sauce");
-		testBurger.removeIngredient("Lettuce");
+		testBurger.changePatties("Veggie");
+		testBurger.toString();
+		System.out.println(testBurger.toString());
+		testBurger = new Burger(true);
+		testBurger.removeCategory("Cheese");
+		testBurger.addIngredient("Mozzarella");
 		testBurger.addPatty();
-		testBurger.changePatties("Chicken");
+		testBurger.addPatty();
+		System.out.println(testBurger.toString());
+		testBurger = new Burger(false);
+		testBurger.toString();
+		testBurger.addCategory("Veggies");
+		testBurger.removeIngredient("Lettuce");
 		testBurger.toString();
 		System.out.println(testBurger.toString());
 		testBurger = new Burger(false);
-		testBurger.addCategory("Sauce");
-		testBurger.addIngredient("Tomato");
-		testBurger.removeIngredient("Ketchup");
+		testBurger.addIngredient("Ketchup");
+		testBurger.addIngredient("Cheddar");
+		testBurger.addIngredient("Onions");
+		testBurger.addIngredient("Mushrooms");
 		testBurger.addPatty();
-		testBurger.addPatty();
-		testBurger.changePatties("Veggie");
-		writer.write(testBurger.toString());
+		testBurger.changePatties("Chicken");
+		System.out.println(testBurger.toString());
+		System.out.println("======================End Test Burger======================");
 	}
 	
 	public static void main(String[] args) throws IOException {		
@@ -334,8 +383,8 @@ public class Main {
 			throw new IOException(FILE_NOT_FOUND);
 		}
 		
-		if (out.isDirectory() || (!out.exists() || !out.isFile())) {
-			throw new IOException(FILE_NOT_FOUND);
+		if ((!out.exists())) {
+			out.createNewFile();
 		}
 		
 		final Scanner inputScanner = new Scanner(input);
@@ -357,7 +406,7 @@ public class Main {
         }
 		writer.close();
 		inputScanner.close();
-//		testMyStack();
-//		testBurger();
+		testMyStack();
+		testBurger();
 	}
 }
