@@ -1,13 +1,10 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
 	private static final String INPUT = "customer.txt";
-	
 	private static final String OUTPUT = "trace.txt";
-	
 	public static final String FILE_NOT_FOUND = "The file doesn't exits.";
 	
 	public static void parseLine(final String line) {
@@ -158,14 +155,6 @@ public class Main {
 				burgerExceptions = backPart.substring(butCondition.length()).trim();
 			}
 		}
-//		System.out.println(pattyCount);
-//		System.out.println(pattyType);
-//		System.out.println(burgerOrder);
-//		System.out.println(withCondition);
-//		System.out.println(burgerOmissions);
-//		System.out.println(burgerAddtions);
-//		System.out.println(butCondition);
-//		System.out.println(burgerExceptions);
 		
 		//Categories
 		if (burgerOrder.toLowerCase().contains("baron burger")) {
@@ -239,18 +228,17 @@ public class Main {
 				} 
 			}
 		} else {			
-//			String[] arrExceptions;
-//			if (burgerExceptions.trim().length() > 0) {
-//				arrExceptions = burgerExceptions.split(" ");
-//				if (arrExceptions.length > 0) {
-//					for (int i = 0; i < arrExceptions.length; i++) {
-//						burgerType.removeIngredient(arrExceptions[i]);
-//					}
-//				} 
-//			}
-			
+			String[] arrExceptions;
+			if (burgerExceptions.trim().length() > 0) {
+				arrExceptions = burgerExceptions.split(" ");
+				if (arrExceptions.length > 0) {
+					for (int i = 0; i < arrExceptions.length; i++) {
+						burgerType.removeIngredient(arrExceptions[i]);
+					}
+				} 
+			}			
 		}
-//		System.out.println(burgerType.toString());
+
 		//Change Patty
 		if (!pattyType.equalsIgnoreCase("beef")) {
 			burgerType.changePatties(pattyType);
@@ -267,7 +255,6 @@ public class Main {
 			burgerType.addPatty();
 		}
 
-//		System.out.println(order.toString());
 		System.out.println(burgerType.toString());
 	}
 	
