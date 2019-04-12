@@ -1,4 +1,6 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -6,7 +8,7 @@ public class Main {
 	private static final String INPUT = "customer.txt";
 	private static final String OUTPUT = "trace.txt";
 	public static final String FILE_NOT_FOUND = "The file doesn't exits.";
-	
+	private static BufferedWriter writer;
 	public static void parseLine(final String line) {
 		String pattyCount;
 		String pattyType;
@@ -277,7 +279,14 @@ public class Main {
 			burgerType.addPatty();
 		}
 
+		
 		System.out.println(burgerType.toString());
+		try {
+			writer.write(burgerType.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void testMyStack() {
@@ -297,7 +306,7 @@ public class Main {
 			System.out.println("EMPTY");
 	}
 	
-	public static void testBurger() {
+	public static void testBurger() throws IOException {
 		Burger testBurger = new Burger(true);
 		testBurger.toString();
 		testBurger.removeCategory("Sauce");
@@ -313,33 +322,40 @@ public class Main {
 		testBurger.addPatty();
 		testBurger.addPatty();
 		testBurger.changePatties("Veggie");
-		System.out.println(testBurger.toString());
+		writer.write(testBurger.toString());
 	}
 	
 	public static void main(String[] args) throws IOException {		
 		final File input = new File(INPUT);
-		final File output = new File(OUTPUT);
+		final File out = new File(OUTPUT);
+		final FileWriter output = new FileWriter(out);
 		
 		if (input.isDirectory() || (!input.exists() || !input.isFile())) {
 			throw new IOException(FILE_NOT_FOUND);
 		}
 		
-		if (output.isDirectory() || (!output.exists() || !output.isFile())) {
+		if (out.isDirectory() || (!out.exists() || !out.isFile())) {
 			throw new IOException(FILE_NOT_FOUND);
 		}
 		
 		final Scanner inputScanner = new Scanner(input);
+		writer = new BufferedWriter(output);
 		int processingOrder = 0;
 		//Read customer order from file.
 		while (inputScanner.hasNextLine()) {   
 			String nextLine = inputScanner.nextLine();
 			if (nextLine.length() > 0) {
+				writer.write("Processing Order " + processingOrder + ": " + nextLine);
 				System.out.println("Processing Order " + processingOrder + ": " + nextLine);
+				writer.write("\n");
 	            parseLine(nextLine);
 	            System.out.println("");
+	            writer.write("\n");
+	            writer.write("\n");
 	            processingOrder++;  
 			}    
         }
+		writer.close();
 		inputScanner.close();
 //		testMyStack();
 //		testBurger();
