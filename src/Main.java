@@ -226,7 +226,7 @@ public class Main {
 				}
 			}
 		}
-				
+
 		//Items
 		if (burgerOrder.toLowerCase().contains("baron burger")) {
 			String[] arrExceptions;
@@ -238,23 +238,25 @@ public class Main {
 					}
 				} 
 			}
-		} else {
-			String[] arrExceptions;
-			if (burgerExceptions.trim().length() > 0) {
-				arrExceptions = burgerExceptions.split(" ");
-				if (arrExceptions.length > 0) {
-					for (int i = 0; i < arrExceptions.length; i++) {
-						burgerType.removeIngredient(arrExceptions[i]);
-					}
-				} 
-			}
+		} else {			
+//			String[] arrExceptions;
+//			if (burgerExceptions.trim().length() > 0) {
+//				arrExceptions = burgerExceptions.split(" ");
+//				if (arrExceptions.length > 0) {
+//					for (int i = 0; i < arrExceptions.length; i++) {
+//						burgerType.removeIngredient(arrExceptions[i]);
+//					}
+//				} 
+//			}
+			
 		}
-		
+//		System.out.println(burgerType.toString());
 		//Change Patty
 		if (!pattyType.equalsIgnoreCase("beef")) {
 			burgerType.changePatties(pattyType);
 		}
 		
+
 		//Add Patty
 		if (pattyCount.equalsIgnoreCase("double")) {
 			burgerType.addPatty();
