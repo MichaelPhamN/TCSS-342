@@ -1626,7 +1626,22 @@ public class Burger {
 		}
 	}
 	
-	public String toString() {		
+	public String toString() {	
+		MyStack<String> convert = new MyStack<String>();
+		
+		while (order.size() != 0) {
+			if (order.peek().equalsIgnoreCase("Top Bun")
+					|| order.peek().equalsIgnoreCase("Bottom Bun")) {
+				order.pop();
+				convert.push("Bun");
+			} else {
+				convert.push(order.pop());
+			}	
+		}
+		
+		if (convert.size() != 0) {
+			order = convert;
+		}
 		return order.toString();
 	}
 }

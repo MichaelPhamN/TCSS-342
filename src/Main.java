@@ -128,31 +128,53 @@ public class Main {
 
 		String backPart = line.substring(frontPart.length()).trim();
 		if (backPart.length() > 0) {
-			if (burgerOrder.toLowerCase().contains("baron burger")) {
-				withCondition = "with no";
+			if (backPart.toLowerCase().contains("but")) {
 				butCondition = "but";
-			} else {
-				withCondition = "with";
-				butCondition = "but no";
-			}
-			
-			if (backPart.toLowerCase().contains(withCondition) && 
-					backPart.toLowerCase().contains(butCondition)) {
+				if (backPart.toLowerCase().contains("no")) {
+					if (backPart.toLowerCase().contains("but no")) {
+						butCondition = "but no";	
+					}
+				} 
 				String[] data = backPart.split(butCondition);
-				if (burgerOrder.toLowerCase().contains("baron burger")) {
-					burgerOmissions = data[0].substring(withCondition.length()).trim();					
+
+				if (data.length > 1) {
+					if(burgerOrder.toLowerCase().contains("baron burger")) {
+						if (data[0].toLowerCase().contains("with")) {
+							withCondition = "with";
+							if (data[0].toLowerCase().contains("no")) {
+								if (backPart.toLowerCase().contains("with no")) {
+									withCondition = "with no";
+								}
+							}
+							burgerOmissions = data[0].substring(withCondition.length()).trim();
+						}
+						burgerExceptions = data[1].trim();
+					} else {
+						if (data[0].toLowerCase().contains("with")) {
+							withCondition = "with";
+							if (data[0].toLowerCase().contains("no")) {
+								if (data[0].toLowerCase().contains("with no")) {
+									withCondition = "with no";
+								}
+							}
+							burgerAddtions = data[0].substring(withCondition.length()).trim();
+						}
+						burgerExceptions = data[1].trim();
+					}
 				} else {
-					burgerAddtions = data[0].substring(withCondition.length()).trim();
+					burgerExceptions = data[0].trim();
 				}
-				burgerExceptions = data[1].trim();
-			} else if (backPart.toLowerCase().contains(withCondition)) {
-				if (burgerOrder.toLowerCase().contains("baron burger")) {
-					burgerOmissions = backPart.substring(withCondition.length()).trim();					
+			} else if (backPart.toLowerCase().contains("with")) {
+				if (backPart.toLowerCase().contains("no")) {
+					if (backPart.toLowerCase().contains("with no")) {
+						withCondition = "with no";
+					}
+				}
+				if(burgerOrder.toLowerCase().contains("baron burger")) {
+					burgerOmissions = backPart.substring(withCondition.length()).trim();
 				} else {
 					burgerAddtions = backPart.substring(withCondition.length()).trim();
 				}
-			} else if (backPart.toLowerCase().contains(butCondition)) {
-				burgerExceptions = backPart.substring(butCondition.length()).trim();
 			}
 		}
 		
@@ -258,12 +280,40 @@ public class Main {
 		System.out.println(burgerType.toString());
 	}
 	
-	public void testMyStack() {
-		
+	public static void testMyStack() {
+		MyStack <String> test = new MyStack<String>();
+		test.push("WITCH!");
+		test.push("A");
+		test.push("SHE'S");
+		System.out.println(test.toString());
+		System.out.println("Size:  " + test.size());
+		System.out.println("Peek:  " + test.peek());
+		if(!test.isEmpty())
+			System.out.println("NOT EMPTY");
+		System.out.println(test.pop());
+		System.out.println(test.pop());
+		System.out.println(test.pop());
+		if(test.isEmpty())
+			System.out.println("EMPTY");
 	}
 	
-	public void testBurger() {
-		
+	public static void testBurger() {
+		Burger testBurger = new Burger(true);
+		testBurger.toString();
+		testBurger.removeCategory("Sauce");
+		testBurger.removeIngredient("Lettuce");
+		testBurger.addPatty();
+		testBurger.changePatties("Chicken");
+		testBurger.toString();
+		System.out.println(testBurger.toString());
+		testBurger = new Burger(false);
+		testBurger.addCategory("Sauce");
+		testBurger.addIngredient("Tomato");
+		testBurger.removeIngredient("Ketchup");
+		testBurger.addPatty();
+		testBurger.addPatty();
+		testBurger.changePatties("Veggie");
+		System.out.println(testBurger.toString());
 	}
 	
 	public static void main(String[] args) throws IOException {		
@@ -282,10 +332,16 @@ public class Main {
 		int processingOrder = 0;
 		//Read customer order from file.
 		while (inputScanner.hasNextLine()) {   
-			System.out.print("Processing Order " + processingOrder + ": ");
-            parseLine(inputScanner.nextLine());
-            processingOrder++;            
+			String nextLine = inputScanner.nextLine();
+			if (nextLine.length() > 0) {
+				System.out.println("Processing Order " + processingOrder + ": " + nextLine);
+	            parseLine(nextLine);
+	            System.out.println("");
+	            processingOrder++;  
+			}    
         }
 		inputScanner.close();
+//		testMyStack();
+//		testBurger();
 	}
 }
