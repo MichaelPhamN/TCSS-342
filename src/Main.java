@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-	private static final String ORDER = "customer.txt";
+	private static final String INPUT = "customer.txt";
+	
+	private static final String OUTPUT = "trace.txt";
 	
 	public static final String FILE_NOT_FOUND = "The file doesn't exits.";
 	
@@ -165,32 +167,33 @@ public class Main {
 //		System.out.println(butCondition);
 //		System.out.println(burgerExceptions);
 		
-		//Add
+		//Categories
 		if (burgerOrder.toLowerCase().contains("baron burger")) {
-			String[] arrExceptions;
-			if (burgerExceptions.trim().length() > 0) {
-				arrExceptions = burgerExceptions.split(" ");
-				if (arrExceptions.length > 1) {
-					for (int i = 0; i < arrExceptions.length; i++) {
-						if (arrExceptions[i].toLowerCase().equals("cheese")) {
-							burgerType.addCategory("Cheese");
-						} else if (arrExceptions[i].toLowerCase().equals("sauce")) {
-							burgerType.addCategory("Sauce");
-						} else if (arrExceptions[i].toLowerCase().equals("veggies")) {
-							burgerType.addCategory("Veggies");
+			//with no
+			String[] arrOmmision;
+			if (burgerOmissions.trim().length() > 0) {
+				arrOmmision = burgerOmissions.split(" ");
+				if (arrOmmision.length > 1) {
+					for (int i = 0; i < arrOmmision.length; i++) {
+						if (arrOmmision[i].toLowerCase().equals("cheese")) {
+							burgerType.removeCategory("Cheese");
+						} else if (arrOmmision[i].toLowerCase().equals("sauce")) {
+							burgerType.removeCategory("Sauce");
+						} else if (arrOmmision[i].toLowerCase().equals("veggies")) {
+							burgerType.removeCategory("Veggies");
 						} else {
-							burgerType.addIngredient(arrExceptions[i]);
+							burgerType.removeIngredient(arrOmmision[i]);
 						}
 					}
 				} else {
-					if (arrExceptions[0].toLowerCase().equals("cheese")) {
-						burgerType.addCategory("Cheese");
-					} else if (arrExceptions[0].toLowerCase().equals("sauce")) {
-						burgerType.addCategory("Sauce");
-					} else if (arrExceptions[0].toLowerCase().equals("veggies")) {
-						burgerType.addCategory("Veggies");
+					if (arrOmmision[0].toLowerCase().equals("cheese")) {
+						burgerType.removeCategory("Cheese");
+					} else if (arrOmmision[0].toLowerCase().equals("sauce")) {
+						burgerType.removeCategory("Sauce");
+					} else if (arrOmmision[0].toLowerCase().equals("veggies")) {
+						burgerType.removeCategory("Veggies");
 					} else {
-						burgerType.addIngredient(arrExceptions[0]);
+						burgerType.removeIngredient(arrOmmision[0]);
 					}
 				}
 			}
@@ -224,62 +227,26 @@ public class Main {
 			}
 		}
 				
-		//Remove
+		//Items
 		if (burgerOrder.toLowerCase().contains("baron burger")) {
-			String[] arrOmissions;
-			if (burgerOmissions.trim().length() > 0) {
-				arrOmissions = burgerOmissions.split(" ");
-				if (arrOmissions.length > 1) {
-					for (int i = 0; i < arrOmissions.length; i++) {
-						if (arrOmissions[i].toLowerCase().equals("cheese")) {
-							burgerType.removeCategory("Cheese");
-						} else if (arrOmissions[i].toLowerCase().equals("sauce")) {
-							burgerType.removeCategory("Sauce");
-						} else if (arrOmissions[i].toLowerCase().equals("veggies")) {
-							burgerType.removeCategory("Veggies");
-						} else {
-							burgerType.removeIngredient(arrOmissions[i]);
-						}
+			String[] arrExceptions;
+			if (burgerExceptions.trim().length() > 0) {
+				arrExceptions = burgerExceptions.split(" ");
+				if (arrExceptions.length > 0) {
+					for (int i = 0; i < arrExceptions.length; i++) {					
+						burgerType.addIngredient(arrExceptions[i]);
 					}
-				} else {
-					if (arrOmissions[0].toLowerCase().equals("cheese")) {
-						burgerType.removeCategory("Cheese");
-					} else if (arrOmissions[0].toLowerCase().equals("sauce")) {
-						burgerType.removeCategory("Sauce");
-					} else if (arrOmissions[0].toLowerCase().equals("veggies")) {
-						burgerType.removeCategory("Veggies");
-					} else {
-						burgerType.removeIngredient(arrOmissions[0]);
-					}
-				}
+				} 
 			}
 		} else {
 			String[] arrExceptions;
 			if (burgerExceptions.trim().length() > 0) {
 				arrExceptions = burgerExceptions.split(" ");
-				if (arrExceptions.length > 1) {
+				if (arrExceptions.length > 0) {
 					for (int i = 0; i < arrExceptions.length; i++) {
-						if (arrExceptions[i].toLowerCase().equals("cheese")) {
-							burgerType.removeCategory("Cheese");
-						} else if (arrExceptions[i].toLowerCase().equals("sauce")) {
-							burgerType.removeCategory("Sauce");
-						} else if (arrExceptions[i].toLowerCase().equals("veggies")) {
-							burgerType.removeCategory("Veggies");
-						} else {
-							burgerType.removeIngredient(arrExceptions[i]);
-						}
+						burgerType.removeIngredient(arrExceptions[i]);
 					}
-				} else {
-					if (arrExceptions[0].toLowerCase().equals("cheese")) {
-						burgerType.removeCategory("Cheese");
-					} else if (arrExceptions[0].toLowerCase().equals("sauce")) {
-						burgerType.removeCategory("Sauce");
-					} else if (arrExceptions[0].toLowerCase().equals("veggies")) {
-						burgerType.removeCategory("Veggies");
-					} else {
-						burgerType.removeIngredient(arrExceptions[0]);
-					}
-				}
+				} 
 			}
 		}
 		
@@ -311,20 +278,25 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws IOException {		
-		final File order = new File(ORDER);
+		final File input = new File(INPUT);
+		final File output = new File(OUTPUT);
 		
-		if (order.isDirectory() || (!order.exists() || !order.isFile())) {
+		if (input.isDirectory() || (!input.exists() || !input.isFile())) {
 			throw new IOException(FILE_NOT_FOUND);
 		}
 		
-		final Scanner input = new Scanner(order);
+		if (output.isDirectory() || (!output.exists() || !output.isFile())) {
+			throw new IOException(FILE_NOT_FOUND);
+		}
+		
+		final Scanner inputScanner = new Scanner(input);
 		int processingOrder = 0;
 		//Read customer order from file.
-		while (input.hasNextLine()) {   
+		while (inputScanner.hasNextLine()) {   
 			System.out.print("Processing Order " + processingOrder + ": ");
-            parseLine(input.nextLine());
+            parseLine(inputScanner.nextLine());
             processingOrder++;            
         }
-        input.close();
+		inputScanner.close();
 	}
 }
