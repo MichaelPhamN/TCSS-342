@@ -186,10 +186,7 @@ public class Burger {
 			while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(" ")
 					&& (sauces.peek().equalsIgnoreCase("mayonnaise") ||
 					sauces.peek().equalsIgnoreCase("baron-sauce"))) {
-//				if (sauces.peek().equalsIgnoreCase("mayonnaise") ||
-//						sauces.peek().equalsIgnoreCase("baron-sauce")) {
-					order.push(sauces.pop());
-//				}
+				order.push(sauces.pop());
 			}
 			
 			if (sauces.peek() != null && sauces.peek().equalsIgnoreCase(" ")) {
@@ -250,10 +247,7 @@ public class Burger {
 			while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(" ")
 					&& (sauces.peek().equalsIgnoreCase("mayonnaise") ||
 							sauces.peek().equalsIgnoreCase("baron-sauce"))) {
-//				if (sauces.peek().equalsIgnoreCase("mayonnaise") ||
-//						sauces.peek().equalsIgnoreCase("baron-sauce")) {
-					order.push(sauces.pop());
-//				}
+				order.push(sauces.pop());
 			}
 			
 			if (sauces.peek() != null && sauces.peek().equalsIgnoreCase(" ")) {
@@ -465,10 +459,7 @@ public class Burger {
 		while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(" ")
 				&& (sauces.peek().equalsIgnoreCase("mayonnaise") ||
 						sauces.peek().equalsIgnoreCase("baron-sauce"))) {
-//			if (sauces.peek().equalsIgnoreCase("mayonnaise") ||
-//					sauces.peek().equalsIgnoreCase("baron-sauce")) {
-				order.push(sauces.pop());
-//			}
+			order.push(sauces.pop());
 		}
 
 		if (sauces.peek() != null && sauces.peek().equalsIgnoreCase(" ")) {
@@ -656,10 +647,7 @@ public class Burger {
 		while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(" ")
 				&& (sauces.peek().equalsIgnoreCase("mayonnaise") ||
 						sauces.peek().equalsIgnoreCase("baron-sauce"))) {
-//			if (sauces.peek().equalsIgnoreCase("mayonnaise") ||
-//					sauces.peek().equalsIgnoreCase("baron-sauce")) {
-				order.push(sauces.pop());
-//			}
+			order.push(sauces.pop());
 		}
 		
 		if (sauces.peek() != null && sauces.peek().equalsIgnoreCase(" ")) {
@@ -1263,10 +1251,7 @@ public class Burger {
 		while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(" ")
 				&& (sauces.peek().equalsIgnoreCase("mayonnaise") ||
 						sauces.peek().equalsIgnoreCase("baron-sauce"))) {
-//			if (sauces.peek().equalsIgnoreCase("mayonnaise") ||
-//					sauces.peek().equalsIgnoreCase("baron-sauce")) {
-				order.push(sauces.pop());
-//			}
+			order.push(sauces.pop());
 		}
 		
 		
@@ -1591,10 +1576,7 @@ public class Burger {
 		while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(" ")
 				&& (sauces.peek().equalsIgnoreCase("mayonnaise") ||
 				sauces.peek().equalsIgnoreCase("baron-sauce"))) {
-//			if (sauces.peek().equalsIgnoreCase("mayonnaise") ||
-//					sauces.peek().equalsIgnoreCase("baron-sauce")) {
-				order.push(sauces.pop());
-//			}
+			order.push(sauces.pop());
 		}
 		
 		if (sauces.peek() != null && sauces.peek().equalsIgnoreCase(" ")) {

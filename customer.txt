@@ -11,5 +11,6 @@ Double Burger with Sauce but Mayonnaise
 Burger with Mustard but no Mustard
 Burger with Veggies but no Sauce
 Burger with Sauce but Mustard
-Double Baron Burger with Cheese
+Double Baron Burger with Veggies Lettuce but no Lettuce
+Burger with Cheese but no Pepperjack
 Double Baron Burger with no Cheddar Mozzarella Pepperjack
