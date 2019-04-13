@@ -1,0 +1,48 @@
+Processing Order 0: Burger
+[Bun, Beef, Bun]
+
+Processing Order 1: Double Baron Burger
+[Bun, Ketchup, Mustard, Mushrooms, Beef, Cheddar, Mozzarella, Pepperjack, Beef, Onions, Tomato, Lettuce, Baron-Sauce, Mayonnaise, Bun, Pickle]
+
+Processing Order 2: Triple Chicken Burger with Onions Cheese but Cheddar
+[Bun, Chicken, Mozzarella, Pepperjack, Chicken, Chicken, Onions, Bun]
+
+Processing Order 3: Baron Burger with no Veggies Sauce but Baron-Sauce
+[Bun, Beef, Cheddar, Mozzarella, Pepperjack, Baron-Sauce, Bun]
+
+Processing Order 4: Burger with Veggies Sauce but no Onions
+[Bun, Ketchup, Mustard, Mushrooms, Beef, Tomato, Lettuce, Baron-Sauce, Mayonnaise, Bun]
+
+Processing Order 5: Triple Chicken Baron Burger with no Mozzarella
+[Bun, Ketchup, Mustard, Mushrooms, Chicken, Cheddar, Pepperjack, Chicken, Chicken, Onions, Tomato, Lettuce, Baron-Sauce, Mayonnaise, Bun, Pickle]
+
+Processing Order 6: Double Veggie Burger with Cheese but no Pepperjack
+[Bun, Veggie, Cheddar, Mozzarella, Veggie, Bun]
+
+Processing Order 7: Burger with Tomato Mushrooms Sauce but no Ketchup
+[Bun, Mustard, Mushrooms, Beef, Tomato, Baron-Sauce, Mayonnaise, Bun]
+
+Processing Order 8: Baron Veggie Burger with no Veggies but Lettuce
+[Bun, Ketchup, Mustard, Beef, Cheddar, Mozzarella, Pepperjack, Lettuce, Baron-Sauce, Mayonnaise, Bun]
+
+Processing Order 9: Double Burger with Sauce but Mayonnaise
+[Bun, Ketchup, Mustard, Beef, Beef, Baron-Sauce, Bun]
+
+Processing Order 10: Burger with Mustard but no Mustard
+[Bun, Beef, Bun]
+
+Processing Order 11: Burger with Veggies but no Sauce
+[Bun, Mushrooms, Beef, Onions, Tomato, Lettuce, Bun]
+
+Processing Order 12: Burger with Sauce but Mustard
+[Bun, Ketchup, Beef, Baron-Sauce, Mayonnaise, Bun]
+
+Processing Order 13: Double Baron Burger with Veggies Lettuce but no Lettuce
+[Bun, Ketchup, Mustard, Beef, Cheddar, Mozzarella, Pepperjack, Beef, Lettuce, Baron-Sauce, Mayonnaise, Bun]
+
+Processing Order 14: Burger with Cheese but no Pepperjack
+[Bun, Beef, Cheddar, Mozzarella, Bun]
+
+Processing Order 15: Double Baron Burger with no Cheddar Mozzarella Pepperjack
+[Bun, Ketchup, Mustard, Mushrooms, Beef, Beef, Onions, Tomato, Lettuce, Baron-Sauce, Mayonnaise, Bun, Pickle]
+
