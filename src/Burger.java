@@ -1,7 +1,18 @@
+/**
+ * Burger Class.
+ * @author Phuc Pham N
+ * @version Spring 2019
+ *
+ */
 public class Burger {
 	private MyStack<String> order = new MyStack<String>();
 	private boolean theWorks;
 	
+	/**
+	 * Constructor of Burger Class.
+	 * @param theWorks true if Baron Burger
+	 * 				   false if Burger
+	 */
 	public Burger(final boolean theWorks) {
 		this.theWorks = theWorks;
 		if(theWorks) {
@@ -29,12 +40,18 @@ public class Burger {
 		}
 	}
 	
+	/**
+	 * Change patty.
+	 * @param pattyType chicken or veggies.
+	 */
 	public void changePatties(final String pattyType) {	
 		MyStack<String> temp = new MyStack<String>();
 		String pop;		
 		
 		while (order.size() != 0) {
 			pop = order.pop();
+			
+			//pop all elements in the stack and change patty if needed.
 			if((pop.equalsIgnoreCase("beef") || pop.equalsIgnoreCase("chicken") ||
 					pop.equalsIgnoreCase("veggie")) && !pop.equalsIgnoreCase(pattyType)) {
 				temp.push(pattyType);
@@ -48,6 +65,19 @@ public class Burger {
 		}
 	}
 	
+	/**
+	 * Add more patty into the burger.
+	 * Convert the burger into five categories.
+	 * 1. Bun
+	 * 2. Cheese
+	 * 3. Veggies
+	 * 4. Sauce
+	 * 5. Patty
+	 * Two items in the burger may be the different categories(Move from the top to the bottom). 
+	 * At that time, add a space into the current category and change to another category.
+	 * When we have five categories. Add new patty into the Patty stack.
+	 * Finally, Combine 5 categories to make a new burger.
+	 */
 	public void addPatty() {
 		String peek = "";
 		String food = "";
@@ -59,6 +89,7 @@ public class Burger {
 		MyStack<String> patties = new MyStack<String>();
 
 		int size = order.size();
+		
 		while (order.size() != 0) {
 			peek = order.peek();
 			String categories = peek;
@@ -164,8 +195,10 @@ public class Burger {
 			patties.pop();
 		}
 		
+		//Add another patty into patty stack.
 		patties.push(patties.peek());
 				
+		//Combine 5 categories to make a burger.
 		if (theWorks) {
 			if (veggies.peek() != null && veggies.peek().equalsIgnoreCase("pickle")) {
 				order.push(veggies.pop());
@@ -299,6 +332,18 @@ public class Burger {
 		}
 	}
 	
+	/**
+	 * Add Category.
+	 * @param type add another category.
+	 * Convert the burger into five categories.
+	 * 1. Bun
+	 * 2. Cheese
+	 * 3. Veggies
+	 * 4. Sauce
+	 * 5. Patty
+	 * If we want to make a new category, create a new default category stack.
+	 * Finally, Combine 5 categories to make a new burger.
+	 */
 	public void addCategory(final String type) {
 		String peek = "";
 		String food = "";
@@ -415,6 +460,7 @@ public class Burger {
 			patties.pop();
 		}
 		
+		//Make a cheese category for the burger
 		if (type.equalsIgnoreCase("cheese")) {
 			cheeses = new MyStack<String>();
 			cheeses.push("Cheddar");
@@ -422,6 +468,7 @@ public class Burger {
 			cheeses.push("Pepperjack");
 		}
 		
+		//Make a veggies category for the burger
 		if (type.equalsIgnoreCase("veggies")) {
 			veggies = new MyStack<String>();
 			veggies.push("Mushrooms");
@@ -436,6 +483,7 @@ public class Burger {
 			
 		}
 		
+		//Make a sauce category for the burger
 		if (type.equalsIgnoreCase("sauce")) {
 			sauces = new MyStack<String>();
 			sauces.push("Ketchup");
@@ -445,6 +493,8 @@ public class Burger {
 			sauces.push("Mayonnaise");
 		}
 		
+		
+		//Combine 5 categories to make a new burger.
 		//Top Bun
 		if (bun.size() != 0) {
 			order.push(bun.pop());
@@ -500,6 +550,18 @@ public class Burger {
 		}
 	}
 	
+	/**
+	 * Remove Category.
+	 * @param type remove another category.
+	 * Convert the burger into five categories.
+	 * 1. Bun
+	 * 2. Cheese
+	 * 3. Veggies
+	 * 4. Sauce
+	 * 5. Patty
+	 * If we want to make a new category, create a new empty category stack.
+	 * Finally, Combine 5 categories to make a new burger.
+	 */
 	public void removeCategory(final String type) {
 		String peek = "";
 		String food = "";
@@ -616,18 +678,22 @@ public class Burger {
 			patties.pop();
 		}
 		
+		//Make an empty cheese stack
 		if (type.equalsIgnoreCase("cheese")) {
 			cheeses = new MyStack<String>();
 		}
 		
+		//Make an empty veggies stack
 		if (type.equalsIgnoreCase("veggies")) {
 			veggies = new MyStack<String>();
 		}
 		
+		//Make an empty sauce stack
 		if (type.equalsIgnoreCase("sauce")) {
 			sauces = new MyStack<String>();
 		}
 		
+		//Combine 5 categories to make a new burger.
 		if (veggies.peek() != null && veggies.peek().equalsIgnoreCase("pickle")) {
 			order.push(veggies.pop());
 		}
@@ -699,6 +765,18 @@ public class Burger {
 		}
 	}
 	
+	/**
+	 * Add Ingredient. This is the hardest part of Assignment One.
+	 * @param type add another ingredient.
+	 * Convert the burger into five categories.
+	 * 1. Bun
+	 * 2. Cheese
+	 * 3. Veggies
+	 * 4. Sauce
+	 * 5. Patty
+	 * After that, put the ingredient in the correct position in the stack.
+	 * Finally, Combine 5 categories to make a new burger.
+	 */
 	public void addIngredient(final String type) {
 		String peek = "";
 		String food = "";
@@ -815,6 +893,7 @@ public class Burger {
 			patties.pop();
 		}
 		
+		//Check what is the category of the ingredient 
 		String categories = "";
 		switch (type) {
 			case "Cheddar":
@@ -857,6 +936,7 @@ public class Burger {
 		
 		if (theWorks) {			
 			//Barron Burger and exceptions (ingredients)
+			//Try to put the current ingredients in the correct position in the veggies stack.
 			if (categories.equalsIgnoreCase("veggies")) {
 				if (veggies.size() == 0) {
 					veggies.push(type);
@@ -871,6 +951,7 @@ public class Burger {
 							veggies.push(container.pop());
 						}
 					} else {
+						
 						if (type.equalsIgnoreCase("mushrooms")) {
 							veggies.push(type);
 							veggies.push(" ");
@@ -944,6 +1025,7 @@ public class Burger {
 				}
 			}
 			
+			//Try to put the current ingredients in the correct position in the sauce stack.
 			if (categories.equalsIgnoreCase("sauces")) {
 				if (sauces.size() == 0) {
 					sauces.push(type);
@@ -1005,6 +1087,7 @@ public class Burger {
 				}
 			}
 			
+			//Try to put the current ingredients in the correct position in the cheese stack.
 			if (categories.equalsIgnoreCase("cheeses")) {
 				if (cheeses.size() == 0) {
 					cheeses.push(type);
@@ -1231,6 +1314,7 @@ public class Burger {
 			}				
 		}
 
+		//Combine 5 categories stack to make a burger.
 		if (veggies.peek() != null && veggies.peek().equalsIgnoreCase("pickle")) {
 			order.push(veggies.pop());
 		}
@@ -1254,9 +1338,6 @@ public class Burger {
 			order.push(sauces.pop());
 		}
 		
-		
-		
-
 		if (sauces.peek() != null && sauces.peek().equalsIgnoreCase(" ")) {
 			sauces.pop();
 		}
@@ -1308,6 +1389,18 @@ public class Burger {
 		
 	}
 	
+	/**
+	 * Remove Ingredient.
+	 * @param type remove another ingredient.
+	 * Convert the burger into five categories.
+	 * 1. Bun
+	 * 2. Cheese
+	 * 3. Veggies
+	 * 4. Sauce
+	 * 5. Patty
+	 * After that, remove the ingredient in the stack.
+	 * Finally, Combine 5 categories to make a new burger.
+	 */
 	public void removeIngredient(final String type) {
 		String peek = "";
 		String food = "";
@@ -1424,6 +1517,7 @@ public class Burger {
 			patties.pop();
 		}
 		
+		//Check what is the category of the ingredient 
 		String categories = "";
 		switch (type) {
 			case "Cheddar":
@@ -1465,6 +1559,7 @@ public class Burger {
 		}	
 		
 		if (theWorks) {		
+			//Try to remove the current ingredients in the cheese stack.
 			if (categories.equalsIgnoreCase("cheese")) {
 				MyStack<String> container = new MyStack<String>();
 				while (cheeses.size() != 0 && !cheeses.peek().equalsIgnoreCase(type)) {
@@ -1480,6 +1575,7 @@ public class Burger {
 				}			
 			}
 			
+			//Try to remove the current ingredients in the sauces stack.
 			if (categories.equalsIgnoreCase("sauces")) {
 				MyStack<String> container = new MyStack<String>();
 				while (sauces.size() != 0 && !sauces.peek().equalsIgnoreCase(type)) {
@@ -1495,6 +1591,7 @@ public class Burger {
 				}
 			}
 			
+			//Try to remove the current ingredients in the veggies stack.
 			if (categories.equalsIgnoreCase("veggies")) {
 				MyStack<String> container = new MyStack<String>();
 				while (veggies.size() != 0 && !veggies.peek().equalsIgnoreCase(type)) {
@@ -1557,6 +1654,7 @@ public class Burger {
 			}
 		}
 		
+		//Combine 5 categories to make a burger
 		if (veggies.peek() != null && veggies.peek().equalsIgnoreCase("pickle")) {
 			order.push(veggies.pop());
 		}

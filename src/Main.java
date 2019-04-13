@@ -1,3 +1,9 @@
+/**
+ * Main Class.
+ * @author Phuc Pham N
+ * @version Spring 2019
+ *
+ */
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -5,10 +11,22 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+	//The sample input file.
 	private static final String INPUT = "customer.txt";
+	
+	//The sample trace for the solution.
 	private static final String OUTPUT = "trace.txt";
+	
+	//If one of the above file is not found, throw exception with this string.
 	public static final String FILE_NOT_FOUND = "The file doesn't exits.";
+	
+	//write the output to the trace file
 	private static BufferedWriter writer;
+	
+	/**
+	 * Read every line in the customer.txt file and parse them.
+	 * @param line the line in the customer.txt.
+	 */
 	public static void parseLine(final String line) {
 		String pattyCount;
 		String pattyType;
@@ -21,10 +39,13 @@ public class Main {
 		Burger burgerType = null;
 
 		final Scanner currentLine = new Scanner(line);
+		//get the first word in the current line.
 		currentLine.useDelimiter(" "); 
 		pattyCount = currentLine.next();
 		boolean checkCount = false;
 		boolean checkType = false;
+		
+		//If the first word is "single" or "double" or "triple", then pattyCount = the first word. 
 		switch (pattyCount) {
 			case "Single":
 				checkCount = true;
@@ -37,6 +58,7 @@ public class Main {
 				break;			
 		}
 		
+		//Contrary, the first word patty type. Then pattyCount is single now.		
 		if (!checkCount) {
 			pattyType = pattyCount;
 			pattyCount = "Single";			
@@ -53,10 +75,13 @@ public class Main {
 					break;			
 			}
 			
+			//But the first word is not patty count or patty type. Then, the first word should be Burger or Baron Burger.
+			//PattyCount is single. PattyType is beef. And the burger type will be the first word.  
 			if (!checkType) {
 				final String burger = pattyType;
 				pattyType = "Beef";
-
+				
+				//Checking the string contains baron. If it does, the burger type is baron burger.
 				if(burger.toLowerCase().contains("baron")) {
 					burgerType = new Burger(true);
 					burgerOrder = "Baron Burger";
@@ -73,6 +98,7 @@ public class Main {
 				}
 			}
 		} else {
+			//Read the next word.
 			pattyType = currentLine.next();
 			checkType = false;
 			switch (pattyType) {
@@ -100,6 +126,7 @@ public class Main {
 			}
 		}
 		
+		//If the line contains the patty count and patty type.
 		if (checkCount && checkType) {
 			final String burger = currentLine.next();
 			if(burger.toLowerCase().contains("baron")) {
@@ -110,6 +137,7 @@ public class Main {
 			}
 		}
 		
+		//The front part (patty count, patty type, and the burger type)
 		String frontPart = "";
 		if (!checkCount) {
 			if(checkType) {
@@ -128,19 +156,32 @@ public class Main {
 
 		currentLine.close();
 
+		//The back part (with no omissions but exceptions). It maybe or maybe not in the line.
 		String backPart = line.substring(frontPart.length()).trim();
+		
+		//Assuming the back part exists.
 		if (backPart.length() > 0) {
+			//If the back part contains "but" word
 			if (backPart.toLowerCase().contains("but")) {
 				butCondition = "but";
+				
+				//The purpose of this statement is to check "but no" word and "with no" word.
+				//In the trace sample file. There is an output "Triple Chicken Burger with Onions Cheese but Cheddar"
+				//It doesn't match with <Patty Count> <Patty Type> Burger with <additions> but no <exceptions>
+				//Also, handled the above situation if it will happen.
 				if (backPart.toLowerCase().contains("no")) {
 					if (backPart.toLowerCase().contains("but no")) {
 						butCondition = "but no";	
 					}
 				} 
+				
+				//Divide the back part into two parts with "but" or "but no" word.
 				String[] data = backPart.split(butCondition);
 
+				//if the back part contains (omissions or additions) and exceptions
 				if (data.length > 1) {
 					if(burgerOrder.toLowerCase().contains("baron burger")) {
+						//remove with or with no 
 						if (data[0].toLowerCase().contains("with")) {
 							withCondition = "with";
 							if (data[0].toLowerCase().contains("no")) {
@@ -179,6 +220,17 @@ public class Main {
 				}
 			}
 		}
+		
+		/**
+		 * Idea to make a burger.
+		 * Step 1. 	Baron Burger 	-> removeCategory or removeIngrident
+		 * 	  	OR	Burger			-> addCategory or addIngrident
+		 * Step 2. 	Baron Burger 	-> addIngrident
+		 * 	  	OR	Burger			-> removeIngrident
+		 * Step 3. 	Change Patty
+		 * Step 4.	Add Patty
+		 */
+		
 		
 		//Categories
 		if (burgerOrder.toLowerCase().contains("baron burger")) {
@@ -279,12 +331,13 @@ public class Main {
 			burgerType.addPatty();
 		}
 
-		
+		//Print the burger in console
 		System.out.println(burgerType.toString());
+		
+		//Write the output into the file.
 		try {
 			writer.write(burgerType.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -383,6 +436,7 @@ public class Main {
 			throw new IOException(FILE_NOT_FOUND);
 		}
 		
+		//Create the trace.txt file if it doesn't exit.
 		if ((!out.exists())) {
 			out.createNewFile();
 		}
@@ -406,7 +460,7 @@ public class Main {
         }
 		writer.close();
 		inputScanner.close();
-		testMyStack();
-		testBurger();
+//		testMyStack();
+//		testBurger();
 	}
 }
